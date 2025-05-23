@@ -1,8 +1,8 @@
-FROM ubuntu:latest
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y nginx
+FROM python:3.9-slim-buster
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+EXPOSE 5000
 
-COPY myapp /var/www/html
-
-EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["python","app.py"]
