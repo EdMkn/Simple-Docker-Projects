@@ -1,8 +1,13 @@
-FROM python:3.9-slim-buster
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-COPY . .
-EXPOSE 5000
+FROM node:14-alpine
 
-CMD ["python","app.py"]
+WORKDIR /app
+
+COPY . /app
+
+RUN npm install
+
+EXPOSE 3000
+
+ENV NAME=projet5
+
+CMD ["npm","start"]
